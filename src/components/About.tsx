@@ -1,8 +1,24 @@
-const About = () => {
+interface AboutProps {
+  darkMode: boolean;
+}
+
+const About: React.FC<AboutProps> = ({ darkMode }) => {
   return (
-    <section className="bg-white p-6 rounded-lg shadow-md mb-6">
-      <h2 className="text-xl font-semibold mb-4">About Me</h2>
-      <p>Write a brief introduction about yourself, your skills, and your experiences.</p>
+    <section
+      id="about"
+      className="py-20 px-6"
+      data-aos="fade-up"
+      style={{ backgroundColor: darkMode ? '#2D3748' : '#F7FAFC' }}
+    >
+      <div className="max-w-6xl mx-auto text-center">
+        <h2 className={`text-3xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>About Me</h2>
+        <p className={`text-lgc mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+          I'm a passionate developer who loves creating web applications. With a background in full-stack development, I enjoy solving problems and building intuitive user interfaces.
+        </p>
+        <p className={`text-lg mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+          I specialize in React, Node.js, and Python. I'm always eager to learn new technologies and improve my skills.
+        </p>
+      </div>
     </section>
   );
 };
