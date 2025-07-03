@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'; // Import the Navbar component
 import About from './components/About';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
+import Hero from './components/Hero';
 
 const App = () => {
   // Set dark mode to true by default, and persist in localStorage
@@ -30,18 +31,8 @@ const App = () => {
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 
       {/* Hero Section */}
-      <section
-        className="hero min-h-screen flex flex-col justify-center items-center text-center bg-cover bg-center relative"
-        style={{ backgroundImage: "url('https://source.unsplash.com/random')" }}
-        data-aos="fade-up"
-      >
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative z-10">
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-4">Hi, I'm Ali Saker</h2>
-          <p className="text-xl text-white mb-6">I build amazing things with code</p>
-          <a href="#portfolio" className="bg-blue-500 text-white px-6 py-3 rounded-full text-lg hover:bg-blue-600">See My Work</a>
-        </div>
-      </section>
+      <Hero darkMode={darkMode} />
+
 
       {/* About Section */}
       <About darkMode={darkMode} />
