@@ -1,4 +1,5 @@
 import React from 'react';
+import { TypeAnimation } from 'react-type-animation';
 
 interface HeroProps {
   darkMode: boolean;
@@ -7,24 +8,37 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ darkMode }) => {
   return (
     <section
-      className="hero min-h-screen flex flex-col justify-center items-center text-center bg-cover bg-center relative"
-      style={{ backgroundImage: "url('https://source.unsplash.com/random')" }}
+      className={`hero min-h-screen flex flex-col justify-center items-center text-center relative px-4 ${
+        darkMode ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-blue-100 to-white'
+      }`}
       data-aos="fade-up"
     >
-      <div className={`absolute inset-0 ${darkMode ? 'bg-black opacity-50' : 'bg-white opacity-80'}`}></div>
       <div className="relative z-10">
-        <h2 className={`text-4xl sm:text-5xl font-extrabold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+        <h1 className={`text-5xl sm:text-6xl font-extrabold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
           Hi, I'm Ali Saker
-        </h2>
-        <p className={`text-xl mb-6 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-          I build amazing things with code
-        </p>
-        <a
-          href="#portfolio"
-          className="bg-blue-500 text-white px-6 py-3 rounded-full text-lg hover:bg-blue-600 transition duration-300"
-        >
-          See My Work
-        </a>
+        </h1>
+
+        <TypeAnimation
+          sequence={[
+            'I build web applications.', 1500,
+            'I solve real-world problems with code.', 1500,
+            'I develop full-stack solutions.', 1500,
+          ]}
+          wrapper="span"
+          speed={50}
+          repeat={Infinity}
+          className={`text-xl sm:text-2xl font-medium ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}
+
+        />
+
+        <div className="mt-8">
+          <a
+            href="#portfolio"
+            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full text-lg shadow-lg transition duration-300"
+          >
+            See My Work
+          </a>
+        </div>
       </div>
     </section>
   );

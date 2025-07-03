@@ -1,47 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Navbar from './components/Navbar'; // Import the Navbar component
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
 import About from './components/About';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
-import Hero from './components/Hero';
 
 const App = () => {
-  // Set dark mode to true by default, and persist in localStorage
-  const [darkMode, setDarkMode] = useState(() => {
-    const savedMode = localStorage.getItem('darkMode');
-    return savedMode === 'true'; // If the value in localStorage is 'true', use dark mode
-  });
+  const [darkMode, setDarkMode] = useState<boolean | null>(null); // null initially
 
+  // Load dark mode from localStorage
+  useEffect(() => {
+    const savedMode = localStorage.getItem('darkMode');
+    setDarkMode(savedMode === 'true');
+  }, []);
+
+  // Save dark mode to localStorage when it changes
+  useEffect(() => {
+    if (darkMode !== null) {
+      localStorage.setItem('darkMode', String(darkMode));
+    }
+  }, [darkMode]);
+
+  // AOS animation init
   useEffect(() => {
     AOS.init({
       duration: 1000,
       easing: 'ease-in-out',
       once: true,
     });
+  }, []);
 
-    // Persist dark mode preference in localStorage
-    localStorage.setItem('darkMode', String(darkMode));
-  }, [darkMode]);
+  // Avoid rendering until darkMode is loaded
+  if (darkMode === null) return null;
+
+  // Safe cast after null check
+  const dark = darkMode;
+  const setDark = setDarkMode as React.Dispatch<React.SetStateAction<boolean>>;
 
   return (
-    <div className={darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}>
-      {/* Navbar Component */}
-      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
-
-      {/* Hero Section */}
-      <Hero darkMode={darkMode} />
-
-
-      {/* About Section */}
-      <About darkMode={darkMode} />
-
-      {/* Portfolio Section */}
-      <Portfolio darkMode={darkMode} />
-
-      {/* Contact Section */}
-      <Contact darkMode={darkMode} />
+    <div className={dark ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}>
+      <Navbar darkMode={dark} setDarkMode={setDark} />
+      <Hero darkMode={dark} />
+      <About darkMode={dark} />
+      <Portfolio darkMode={dark} />
+      <Contact darkMode={dark} />
     </div>
   );
 };
