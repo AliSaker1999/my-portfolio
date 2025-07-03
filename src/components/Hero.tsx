@@ -8,7 +8,7 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ darkMode }) => {
   return (
     <section
-      className={`hero min-h-screen flex flex-col justify-center items-center text-center relative px-4 ${
+      className={`hero min-h-screen pt-20 flex flex-col justify-center items-center text-center relative px-4 ${
         darkMode ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-blue-100 to-white'
       }`}
       data-aos="fade-up"
@@ -18,18 +18,19 @@ const Hero: React.FC<HeroProps> = ({ darkMode }) => {
           Hi, I'm Ali Saker
         </h1>
 
-        <TypeAnimation
-          sequence={[
-            'I build web applications.', 1500,
-            'I solve real-world problems with code.', 1500,
-            'I develop full-stack solutions.', 1500,
-          ]}
-          wrapper="span"
-          speed={50}
-          repeat={Infinity}
-          className={`text-xl sm:text-2xl font-medium ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}
-
-        />
+        <div className={`text-xl sm:text-2xl font-medium ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>
+          <TypeAnimation
+            key={darkMode ? 'dark' : 'light'}
+            sequence={[
+              'I build web applications.', 1500,
+              'I solve real-world problems with code.', 1500,
+              'I develop full-stack solutions.', 1500,
+            ]}
+            wrapper="span"
+            speed={50}
+            repeat={Infinity}
+          />
+        </div>
 
         <div className="mt-8">
           <a

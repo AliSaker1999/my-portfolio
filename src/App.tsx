@@ -7,23 +7,22 @@ import About from './components/About';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 
+const getInitialDarkMode = (): boolean => {
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem('darkMode') === 'true';
+  }
+  return false;
+};
+
 const App = () => {
-  const [darkMode, setDarkMode] = useState<boolean | null>(null); // null initially
+  const [darkMode, setDarkMode] = useState<boolean>(getInitialDarkMode);
 
-  // Load dark mode from localStorage
+  // Save mode
   useEffect(() => {
-    const savedMode = localStorage.getItem('darkMode');
-    setDarkMode(savedMode === 'true');
-  }, []);
-
-  // Save dark mode to localStorage when it changes
-  useEffect(() => {
-    if (darkMode !== null) {
-      localStorage.setItem('darkMode', String(darkMode));
-    }
+    localStorage.setItem('darkMode', String(darkMode));
   }, [darkMode]);
 
-  // AOS animation init
+  // Init AOS
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -32,20 +31,18 @@ const App = () => {
     });
   }, []);
 
-  // Avoid rendering until darkMode is loaded
-  if (darkMode === null) return null;
-
-  // Safe cast after null check
-  const dark = darkMode;
-  const setDark = setDarkMode as React.Dispatch<React.SetStateAction<boolean>>;
+  // 🔁 Refresh AOS on theme toggle
+  useEffect(() => {
+    AOS.refresh();
+  }, [darkMode]);
 
   return (
-    <div className={dark ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}>
-      <Navbar darkMode={dark} setDarkMode={setDark} />
-      <Hero darkMode={dark} />
-      <About darkMode={dark} />
-      <Portfolio darkMode={dark} />
-      <Contact darkMode={dark} />
+    <div className={darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}>
+      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Hero darkMode={darkMode} />
+      <About darkMode={darkMode} />
+      <Portfolio darkMode={darkMode} />
+      <Contact darkMode={darkMode} />
     </div>
   );
 };
