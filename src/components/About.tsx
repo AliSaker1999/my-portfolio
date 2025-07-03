@@ -37,12 +37,13 @@ const About: React.FC<AboutProps> = ({ darkMode }) => {
         {/* Optional: Add CV Button */}
         <div className="mt-8">
           <a
-            href="/AliSaker_CV.pdf"
-            download
-            className="inline-block bg-blue-500 text-white px-6 py-2 rounded-full text-lg hover:bg-blue-600 transition"
-          >
-            Download My CV
-          </a>
+  href="https://github.com/AliSaker1999/my-portfolio/raw/main/public/AliSaker_CV.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-block bg-blue-500 text-white px-6 py-2 rounded-full text-lg hover:bg-blue-600 transition"
+>
+  View My CV
+</a>
         </div>
       </div>
     </section>

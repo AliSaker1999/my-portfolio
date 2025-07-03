@@ -9,26 +9,47 @@ interface ContactProps {
 const Contact: React.FC<ContactProps> = ({ darkMode }) => {
   const formRef = useRef<HTMLFormElement>(null);
   const [messageSent, setMessageSent] = useState(false);
+  const [error, setError] = useState(false);
 
   const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Form submitted");
 
-    if (!formRef.current) return;
+    if (!formRef.current) {
+      console.error("Form reference is null");
+      return;
+    }
+
+    const formData = new FormData(formRef.current);
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const message = formData.get('message') as string;
+
+    if (!name || !email || !message) {
+      setError(true);
+      return;
+    }
+
+    setError(false);
 
     emailjs
       .sendForm(
-        'your_service_id',
-        'your_template_id',
+        process.env.REACT_APP_EMAILJS_SERVICE_ID!,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID!,
         formRef.current,
-        'your_public_key'
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY!
       )
       .then(
         () => {
           setMessageSent(true);
           formRef.current?.reset();
+
+          setTimeout(() => {
+            setMessageSent(false);
+          }, 5000);
         },
         (error) => {
-          console.error(error.text);
+          console.error("Failed to send email:", error?.text || error);
         }
       );
   };
@@ -79,26 +100,44 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
           onSubmit={sendEmail}
           className="max-w-xl mx-auto space-y-4 text-left"
         >
-          <input
-            type="text"
-            placeholder="Your Name"
-            className="w-full p-3 rounded-md border focus:outline-none text-black"
-          />
+          <div>
+            <label className="block mb-1 text-sm font-medium">Name</label>
+            <input
+              name="name"
+              type="text"
+              placeholder="Your Name"
+              required
+              className="w-full p-3 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white text-black placeholder-gray-500"
+            />
+          </div>
 
-          <input
-            type="email"
-            placeholder="Your Email"
-            className="w-full p-3 rounded-md border focus:outline-none mt-4 text-black"
-          />
+          <div>
+            <label className="block mb-1 text-sm font-medium">Email</label>
+            <input
+              name="email"
+              type="email"
+              placeholder="Your Email"
+              required
+              className="w-full p-3 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white text-black placeholder-gray-500"
+            />
+          </div>
 
-          <textarea
-            placeholder="Your Message"
-            className="w-full p-3 rounded-md border focus:outline-none mt-4 text-black"
-          />
+          <div>
+            <label className="block mb-1 text-sm font-medium">Message</label>
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              required
+              className="w-full p-3 rounded-md border focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white text-black placeholder-gray-500"
+              rows={5}
+            />
+          </div>
+
+          {error && <p className="text-red-500 text-sm">Please fill in all fields.</p>}
 
           <button
             type="submit"
-            className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition"
+            className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-transform duration-200 hover:scale-105"
           >
             Send Message
           </button>
