@@ -19,7 +19,7 @@ const projects = [
     description: 'Manage recipes and users with secure authentication.',
     image: process.env.PUBLIC_URL + '/images/recipe-app.png',
     github: 'https://github.com/AliSaker1999/AliSakr',
-    demo: 'https://recipe-frontend.netlify.app/',
+    demo: 'https://recipe-git-main-ali-sakers-projects-ad3ecb8a.vercel.app/',
   },
   {
     title: 'Portfolio Website',
