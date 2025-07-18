@@ -12,13 +12,13 @@ const projects = [
     description: 'A full-stack quiz app with JWT, React, and ASP.NET Core.',
     image: process.env.PUBLIC_URL + '/images/quiz-app.png',
     github: 'https://github.com/AliSaker1999/Quizify',
-    demo: 'https://quiz-frontend.netlify.app/',
+    demo: 'https://frontend-tan-one-50.vercel.app/',
   },
   {
     title: 'Recipe Manager',
     description: 'Manage recipes and users with secure authentication.',
     image: process.env.PUBLIC_URL + '/images/recipe-app.png',
-    github: 'https://github.com/AliSaker1999/AliSakr',
+    github: 'https://github.com/AliSaker1999/Recipe',
     demo: 'https://recipe-git-main-ali-sakers-projects-ad3ecb8a.vercel.app/',
   },
   {
