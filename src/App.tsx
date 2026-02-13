@@ -37,7 +37,7 @@ const App = () => {
   }, [darkMode]);
 
   return (
-    <div className={darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}>
+    <div className={`min-h-screen overflow-x-hidden transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}>
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
       <Hero darkMode={darkMode} />
       <About darkMode={darkMode} />
