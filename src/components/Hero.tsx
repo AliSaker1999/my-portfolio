@@ -15,7 +15,8 @@ const Hero: React.FC<HeroProps> = ({ darkMode }) => {
       data-aos="fade-up"
     >
       <div className="max-w-6xl mx-auto w-full relative z-10">
-        <div className="max-w-3xl">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+          <div className="order-2 lg:order-1 max-w-3xl">
           <span className="inline-block mb-4 px-3 sm:px-4 py-1 rounded-full bg-blue-500/10 text-blue-500 font-semibold text-xs sm:text-sm leading-relaxed">
             Full Stack Web Developer • Beirut • Open to new opportunities
           </span>
@@ -59,6 +60,17 @@ const Hero: React.FC<HeroProps> = ({ darkMode }) => {
             >
               Contact Me
             </a>
+            <a
+              href={`${process.env.PUBLIC_URL}/AliSaker_CV.pdf`}
+              download="AliSaker_CV.pdf"
+              className={`px-6 py-3 rounded-lg text-base font-semibold border transition-colors text-center w-full sm:w-auto ${
+                darkMode
+                  ? 'border-blue-400 text-blue-300 hover:bg-blue-500/10'
+                  : 'border-blue-200 text-blue-600 hover:bg-blue-50'
+              }`}
+            >
+              Download CV
+            </a>
           </div>
 
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
@@ -74,6 +86,17 @@ const Hero: React.FC<HeroProps> = ({ darkMode }) => {
               <p className="text-xl sm:text-2xl font-bold text-blue-500">RBAC + APIs</p>
               <p className={darkMode ? 'text-gray-300 text-sm' : 'text-gray-600 text-sm'}>Secure Scalable Systems</p>
             </div>
+          </div>
+
+          </div>
+
+          <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+            <img
+              src={`${process.env.PUBLIC_URL}/MyProfilePic-removebg-preview.png`}
+              alt="Ali Saker"
+              className="w-full max-w-[220px] sm:max-w-xs lg:max-w-md h-auto object-contain"
+              loading="eager"
+            />
           </div>
         </div>
       </div>
